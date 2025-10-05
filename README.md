@@ -9,10 +9,10 @@ This project demonstrates comprehensive Pluggable Database (PDB) management in O
 
 | **Field** | **Value** | **Description** |
 |-----------|-----------|-----------------|
-| **Student Name** | Eric Rodriguez | |
-| **Student ID** | 2024101 | Unique identifier |
-| **Primary PDB** | er_pdb_2024101 | Main workspace database |
-| **Database User** | eric_plsqlauca_2024101 | Administrative account |
+| **Student Name** | Benjamin Niyongira | |
+| **Student ID** | 27883 | Unique identifier |
+| **Primary PDB** | be_pdb_2024101 | Main workspace database |
+| **Database User** | Benjamin_plsqlauca_27883 | Administrative account |
 | **Environment** | Oracle 19c | Multitenant Architecture |
 
 ---
@@ -31,16 +31,16 @@ CONNECT / AS SYSDBA;
 SHOW CON_NAME;
 
 -- Step 3: Create primary PDB with administrative user
-CREATE PLUGGABLE DATABASE er_pdb_2024101
-ADMIN USER eric_plsqlauca_2024101 IDENTIFIED BY 1234
+CREATE PLUGGABLE DATABASE be_pdb_2024101
+ADMIN USER Benjamin_plsqlauca_27883 IDENTIFIED BY 1234
 FILE_NAME_CONVERT=('C:\ORACLE19C\ORADATA\ORCL\PDBSEED\',
-                   'C:\ORACLE19C\ORADATA\ORCL\ER_PDB_2024101\');
+                   'C:\ORACLE19C\ORADATA\ORCL\be_PDB_27883\');
 
 -- Step 4: Open PDB for operations
-ALTER PLUGGABLE DATABASE er_pdb_2024101 OPEN;
+ALTER PLUGGABLE DATABASE be_pdb_27883 OPEN;
 
 -- Step 5: Persist open state across restarts
-ALTER PLUGGABLE DATABASE er_pdb_2024101 SAVE STATE;
+ALTER PLUGGABLE DATABASE be_pdb_27883 SAVE STATE;
 ```
 
 ### **Verification Commands**
@@ -48,16 +48,12 @@ ALTER PLUGGABLE DATABASE er_pdb_2024101 SAVE STATE;
 -- Confirm PDB creation and status
 SELECT name, open_mode, restricted 
 FROM v$pdbs 
-WHERE name = 'ER_PDB_2024101';
-
--- Verify administrative user exists
-SELECT username, account_status 
-FROM dba_users 
-WHERE username = 'ERIC_PLSQLAUCA_2024101';
+;
 ```
 
 ### **📸 Evidence of Completion**
-[Insert PDB creation screenshot showing successful execution and verification queries]
+
+![Alt text](pluggable%20created.PNG)
 
 ---
 
@@ -69,34 +65,37 @@ Demonstrate complete PDB lifecycle by creating and deleting a temporary pluggabl
 ### **Creation Phase**
 ```sql
 -- Create temporary PDB for demonstration
-CREATE PLUGGABLE DATABASE er_to_delete_pdb_2024101
-ADMIN USER temp_admin IDENTIFIED BY temp123
+CREATE PLUGGABLE DATABASE be_to_delete_pdb_27883
+ADMIN USER ben_27883 IDENTIFIED BY 1234
 FILE_NAME_CONVERT=('C:\ORACLE19C\ORADATA\ORCL\PDBSEED\',
-                   'C:\ORACLE19C\ORADATA\ORCL\ER_TO_DELETE_PDB_2024101\');
+                   'C:\ORACLE19C\ORADATA\ORCL\ben_TO_DELETE_PDB_27883\');
 
 -- Open temporary PDB
-ALTER PLUGGABLE DATABASE er_to_delete_pdb_2024101 OPEN;
+ALTER PLUGGABLE DATABASE be_to_delete_pdb_27883 OPEN;
 
 -- Verify creation success
 SELECT name, open_mode FROM v$pdbs 
-WHERE name LIKE '%DELETE%';
+;
 ```
+
+![Alt text](be%20delet1.PNG)
 
 ### **Deletion Phase**
 ```sql
 -- Close PDB before deletion
-ALTER PLUGGABLE DATABASE er_to_delete_pdb_2024101 CLOSE;
+ALTER PLUGGABLE DATABASE be_to_delete_pdb_27883 CLOSE;
 
 -- Drop PDB including physical datafiles
-DROP PLUGGABLE DATABASE er_to_delete_pdb_2024101 INCLUDING DATAFILES;
+DROP PLUGGABLE DATABASE be_to_delete_pdb_27883 INCLUDING DATAFILES;
 
 -- Confirm deletion
 SELECT name, open_mode FROM v$pdbs 
-WHERE name LIKE '%DELETE%';
+;
 ```
 
 ### **📸 Evidence of Completion**
 
+![Alt text](drop.PNG)
 
 ---
 
@@ -106,7 +105,7 @@ WHERE name LIKE '%DELETE%';
 Configure and utilize Oracle Enterprise Manager for database monitoring and administration.
 
 ### **Access Configuration**
-- **URL**: `https://localhost:5500/em`
+- **URL**: `https://localhost:5501/em`
 - **Authentication**: SYS account with SYSDBA privileges
 - **Port Verification**: `SELECT dbms_xdb_config.gethttpsport() FROM dual;`
 
@@ -117,10 +116,10 @@ Configure and utilize Oracle Enterprise Manager for database monitoring and admi
 - ✅ Storage allocation monitoring
 
 ### **📸 Evidence of Completion**
-[Insert OEM dashboard screenshot showing:
-- Username visibility in top-right corner
-- PDB status in container view
-- Database health metrics]
+
+![Alt text](oem.PNG)
+
+![Alt text](web%20page.PNG)
 
 ---
 
@@ -193,11 +192,7 @@ CDB$ROOT (Container Database)
 - ✅ Oracle Enterprise Manager configuration
 - ✅ Troubleshooting common database administration issues
 
-### **Best Practices Implemented**
-- Proper naming conventions following organizational standards
-- Comprehensive verification at each operational phase
-- Documentation of issues and resolution strategies
-- Security-conscious administrative practices
+
 
 ---
 
@@ -214,7 +209,7 @@ CDB$ROOT (Container Database)
 
 <div align="center">
 
-**📅 Project Completion Date**: $(date)  
+**📅 Project Completion Date**: 05/10/2025  
 **✅ Status**: Completed Successfully  
 **🔐 Security Level**: Educational/Development  
 
