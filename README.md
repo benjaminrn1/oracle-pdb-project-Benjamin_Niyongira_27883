@@ -11,7 +11,7 @@ This project demonstrates comprehensive Pluggable Database (PDB) management in O
 |-----------|-----------|-----------------|
 | **Student Name** | Benjamin Niyongira | |
 | **Student ID** | 27883 | Unique identifier |
-| **Primary PDB** | be_pdb_2024101 | Main workspace database |
+| **Primary PDB** | be_pdb_27883 | Main workspace database |
 | **Database User** | Benjamin_plsqlauca_27883 | Administrative account |
 | **Environment** | Oracle 19c | Multitenant Architecture |
 
@@ -31,7 +31,7 @@ CONNECT / AS SYSDBA;
 SHOW CON_NAME;
 
 -- Step 3: Create primary PDB with administrative user
-CREATE PLUGGABLE DATABASE be_pdb_2024101
+CREATE PLUGGABLE DATABASE be_pdb_27883
 ADMIN USER Benjamin_plsqlauca_27883 IDENTIFIED BY 1234
 FILE_NAME_CONVERT=('C:\ORACLE19C\ORADATA\ORCL\PDBSEED\',
                    'C:\ORACLE19C\ORADATA\ORCL\be_PDB_27883\');
